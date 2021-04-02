@@ -1,13 +1,16 @@
-// mikdusan
-// —
-// Dziś o 01:24
-// ah got it to work. but you have to take a special step. consider this case:
+// clad
+// 1. I want to open that executable
+// 2. I want to send it "command 1"
+// 3. I want to send it "command 2"
+// Can you tell me how do I use use the ChildProcess to perform these three tasks?
 
+// mikdusan
+// ah got it to work. but you have to take a special step. consider this case:
 // 1. spawn "cat" and write some lines to it. let it just inherit stdout/stderr.
 // 2. waiting on child won't return until stdin pipe is closed
 // 3. you can child.stdin.?.close() but I had to follow it up with child.stdin = null; so the regular child_process code doesn't try to close it in cleanupAfterWait()
-//    this simple just-write to child seems to work:
-//    https://zigbin.io/0f4af2
+// this simple just-write to child seems to work:
+// https://zigbin.io/0f4af2
 
 const std = @import("std");
 
