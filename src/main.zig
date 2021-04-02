@@ -129,6 +129,61 @@ pub fn main() anyerror!void {
     print("{any}\n", .{digits.items});
 
     print("{}\n", .{std.Target.current.os.tag});
+
+    // https://zigforum.org/t/defining-slice-of-mutable-array-literal-in-one-statement/218/13
+    var slice_of_mutable_array_literal: []u8 = blk: {
+        var arr = [_]u8{ 1, 2, 3 };
+        break :blk arr[0..];
+    };
+
+    print("{any}\n", .{slice_of_mutable_array_literal});
+
+    const two_nested_blocks = blk: {
+        {
+            const a: i32 = 2;
+            break :blk a;
+        }
+    };
+
+    print("{}\n", .{two_nested_blocks});
+
+    var two_nested_blocks_var: i32 = blk: {
+        {
+            var a: i32 = 2;
+            break :blk a;
+        }
+    };
+
+    print("{}\n", .{two_nested_blocks_var});
+
+    var cond = true;
+    var many_nested_blocks: usize = blk: {
+        var a: usize = 1;
+        {
+            var b: usize = 2;
+            {
+                var c: usize = 3;
+                if (cond) break :blk c;
+            }
+            if (cond) break :blk b;
+        }
+        break :blk a;
+    };
+
+    print("{}\n", .{many_nested_blocks});
+
+    const s = [_][7]int{
+        [_]int{ 08, 02, 22, 97, 38, 15, 00 },
+        [_]int{ 49, 49, 99, 40, 17, 81, 18 },
+        [_]int{ 81, 49, 31, 73, 55, 79, 14 },
+        [_]int{ 52, 70, 95, 23, 04, 60, 11 },
+        [_]int{ 22, 31, 16, 71, 51, 67, 63 },
+        [_]int{ 24, 47, 32, 60, 99, 03, 45 },
+        [_]int{ 32, 98, 81, 28, 64, 23, 67 },
+        [_]int{ 67, 26, 20, 68, 02, 62, 12 },
+        [_]int{ 24, 55, 58, 05, 66, 73, 99 },
+        [_]int{ 21, 36, 23, 09, 75, 00, 76 },
+    };
 }
 
 var var_file_scope: i32 = 1;
