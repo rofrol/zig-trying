@@ -1,4 +1,4 @@
-// std.fs.Dir.readFileAlloc
+// Read at once with std.fs.Dir.readFileAlloc
 const std = @import("std");
 
 pub fn main() anyerror!void {
