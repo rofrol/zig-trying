@@ -2,13 +2,7 @@ Base created with `zig init-exe`
 
 ## run
 
-Windows
-
-'zig build-exe src/main.zig && main'
-
-or Linux
-
-'zig build-exe src/main.zig && ./main'
+run_win.sh or run_lin.sh
 
 ## autorun
 
