@@ -80,6 +80,16 @@ pub fn main() anyerror!void {
     // const a = [_]u32{ 1, 2 } ++ [_]u32{ 3, 4 } == &[_]u32{ 1, 2, 3, 4 };
     // print("{}", .{a});
 
+    print("{}\n", .{@as(i2, -0b10)});
+    print("{b}\n", .{@as(i2, -0b10)});
+    print("std.math.minInt(i2): {}\n", .{std.math.minInt(i2)});
+    print("{b}\n", .{@as(i2, -0b01)});
+    print("{b}\n", .{@as(i4, -0b1000)});
+    print("std.math.minInt(i4): {}\n", .{std.math.minInt(i4)});
+    print("std.math.minInt(i1): {}\n", .{std.math.minInt(i1)});
+    print("std.math.maxInt(i1): {}\n", .{std.math.maxInt(i1)});
+    print("std.math.maxInt(i0): {}\n", .{std.math.maxInt(i0)});
+
     const array1 = [_]u32{ 1, 2 };
     const array2 = [_]u32{ 3, 4 };
     const together = array1 ++ array2;
@@ -184,13 +194,6 @@ pub fn main() anyerror!void {
         [_]i32{ 24, 55, 58, 05, 66, 73, 99 },
         [_]i32{ 21, 36, 23, 09, 75, 00, 76 },
     };
-
-    print("{}\n", .{@as(i2, -0b10)});
-    print("{b}\n", .{@as(i2, -0b10)});
-    print("std.math.minInt(i2): {}\n", .{std.math.minInt(i2)});
-    print("{b}\n", .{@as(i2, -0b01)});
-    print("{b}\n", .{@as(i4, -0b1000)});
-    print("std.math.minInt(i4): {}\n", .{std.math.minInt(i4)});
 }
 
 var var_file_scope: i32 = 1;
