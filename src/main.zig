@@ -194,6 +194,21 @@ pub fn main() anyerror!void {
         [_]i32{ 24, 55, 58, 05, 66, 73, 99 },
         [_]i32{ 21, 36, 23, 09, 75, 00, 76 },
     };
+
+    const x = .{ .y = &.{ .z = 10 } };
+    print("x: {}\n", x);
+
+    interger_overflow();
+}
+
+fn interger_overflow() void {
+    var i: u8 = 1;
+    // panic: integer overflow
+    // var x: u8 = 255 + i;
+
+    // this works
+    var y: u8 = 255 - i + 1;
+    print("y: {}\n", .{y});
 }
 
 var var_file_scope: i32 = 1;
