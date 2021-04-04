@@ -214,9 +214,7 @@ pub fn main() anyerror!void {
     print("0b111101101 & 1 << 2: 0b{b:0>9}\n", .{0b111101101 & 1 << 2});
 
     // AstroKing
-    //  —
-    // 30.03.2021
-    // Hi Guys, I have just started learning zig, I work mostly on C for low level fimware and embedded projects. I am having some trouble with casting rules. I want to call  rand() (returns c_int type). I then @rem on the result with 0xFF to get a random number b/w 0 and 0xFE. I want to do this 3 times to get random values for R G and B for getting a random color. How would I go about casting this?
+    // I work mostly on C for low level fimware and embedded projects. I am having some trouble with casting rules. I want to call  rand() (returns c_int type). I then @rem on the result with 0xFF to get a random number between 0 and 0xFE. I want to do this 3 times to get random values for R G and B for getting a random color.
 
     // https://www.reddit.com/r/Zig/comments/cdw88t/does_zig_have_random_number_and_random_string/
     // https://ziglang.org/documentation/master/std/#std;rand
@@ -228,9 +226,14 @@ pub fn main() anyerror!void {
     // https://github.com/ziglang/zig/blob/6fc822a9481c0d2c8b37f26f41be603dd77ab5a4/lib/libcxx/include/stdlib.h
     cstd.srand(@intCast(u32, time.time(0)));
 
-    const R_int = @rem(cstd.rand(), 0xFF);
+    const rand = cstd.rand();
+    print("rand: {x}\n", .{rand});
+    print("rand: {d}\n", .{rand});
+    print("0xFF: {d}\n", .{0xFF});
+    const R_int = @rem(rand, 0xFF);
     const R_hex = @bitCast(u8, @truncate(i8, R_int));
     print("R_hex: {x}\n", .{R_hex});
+    print("R_hex: {d}\n", .{R_hex});
     const R_hex2 = @truncate(u8, @bitCast(c_uint, R_int));
     print("R_hex2: {x}\n", .{R_hex});
 
