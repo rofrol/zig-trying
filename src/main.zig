@@ -199,7 +199,51 @@ pub fn main() anyerror!void {
     print("x: {}\n", x);
 
     interger_overflow();
+
+    const thing1 = 1;
+    const thing2 = 2;
+    @call(.{}, call_bypasses_a_tuple, .{ thing1, thing2 });
+
+    print("{d}, {d}\n", .{11} ++ .{22});
+
+    //  check that the third bit is true? 0b111101101 & 0b000000100 == 0b000000100
+    // (1 shifted left 2 times = 3rd bit)
+    print("3rd bit: {b}\n", .{1 << 2});
+    print("0b111101101 & 0b000000100: {b}\n", .{0b111101101 & 0b000000100});
+    print("0b111101101 & 1 << 2: {b}\n", .{0b111101101 & 1 << 2});
+    print("0b111101101 & 1 << 2: 0b{b:0>9}\n", .{0b111101101 & 1 << 2});
+
+    // AstroKing
+    //  —
+    // 30.03.2021
+    // Hi Guys, I have just started learning zig, I work mostly on C for low level fimware and embedded projects. I am having some trouble with casting rules. I want to call  rand() (returns c_int type). I then @rem on the result with 0xFF to get a random number b/w 0 and 0xFE. I want to do this 3 times to get random values for R G and B for getting a random color. How would I go about casting this?
+
+    // https://www.reddit.com/r/Zig/comments/cdw88t/does_zig_have_random_number_and_random_string/
+    // https://ziglang.org/documentation/master/std/#std;rand
+    // https://ziglearn.org/chapter-4/#linking-libc
+    // zig build-exe src/main -lc
+    // zig build-exe src/main --library c
+    // The CLI now accepts -l parameters as an alias for --library. As an example, one may specify -lc rather than --library c
+    // https://ziglang.org/download/0.5.0/release-notes.html
+    // https://github.com/ziglang/zig/blob/6fc822a9481c0d2c8b37f26f41be603dd77ab5a4/lib/libcxx/include/stdlib.h
+    cstd.srand(@intCast(u32, time.time(0)));
+
+    const R_int = @rem(cstd.rand(), 0xFF);
+    const R_hex = @bitCast(u8, @truncate(i8, R_int));
+    print("R_hex: {x}\n", .{R_hex});
+    const R_hex2 = @truncate(u8, @bitCast(c_uint, R_int));
+    print("R_hex2: {x}\n", .{R_hex});
+
+    var i: usize = 0;
+
+    while (i <= 10) {
+        std.debug.warn("{} ", .{@rem(cstd.rand(), 100) + 1});
+        i += 1;
+    }
 }
+
+const time = @cImport(@cInclude("time.h"));
+const cstd = @cImport(@cInclude("stdlib.h"));
 
 fn interger_overflow() void {
     var i: u8 = 1;
@@ -209,6 +253,10 @@ fn interger_overflow() void {
     // this works
     var y: u8 = 255 - i + 1;
     print("y: {}\n", .{y});
+}
+
+fn call_bypasses_a_tuple(thing1: i32, thing2: i32) void {
+    print("{d}, {d}\n", .{ thing1, thing2 });
 }
 
 var var_file_scope: i32 = 1;
