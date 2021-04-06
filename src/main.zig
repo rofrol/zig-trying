@@ -85,7 +85,13 @@ pub fn main() anyerror!void {
     print("std.math.minInt(i2): {}\n", .{std.math.minInt(i2)});
     print("{b}\n", .{@as(i2, -0b01)});
     print("{b}\n", .{@as(i4, -0b1000)});
+    print("std.math.minInt(i4): {b}\n", .{std.math.minInt(i4)});
     print("std.math.minInt(i4): {}\n", .{std.math.minInt(i4)});
+    print("std.math.minInt(i4)+1: {b}\n", .{std.math.minInt(i4) + 1});
+    print("std.math.minInt(i4)+1: {}\n", .{std.math.minInt(i4) + 1});
+    print("std.math.minInt(i4)+2: {b}\n", .{std.math.minInt(i4) + 2});
+    print("std.math.minInt(i4)+2: {}\n", .{std.math.minInt(i4) + 2});
+
     print("std.math.minInt(i1): {}\n", .{std.math.minInt(i1)});
     print("std.math.maxInt(i1): {}\n", .{std.math.maxInt(i1)});
     print("std.math.maxInt(i0): {}\n", .{std.math.maxInt(i0)});
