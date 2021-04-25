@@ -66,6 +66,9 @@ pub fn main() anyerror!void {
     print("std.math.minInt(i16): {}\n", .{std.math.minInt(i16)});
     print("std.math.minInt(i16) binary: {b}\n", .{std.math.minInt(i16)});
     print("std.math.minInt(i16) binary: {b}\n", .{std.math.minInt(i16) + 1});
+    print("std.math.maxInt(u4): {}\n", .{std.math.maxInt(u4)});
+    print("std.math.maxInt(u8): {}\n", .{std.math.maxInt(u8)});
+    print("std.math.maxInt(u16): {}\n", .{std.math.maxInt(u16)});
     print("std.math.maxInt(u32): {}\n", .{std.math.maxInt(u32)});
     print("std.math.maxInt(u64): {}\n", .{std.math.maxInt(u64)});
     print("std.math.minInt(u64): {}\n", .{std.math.minInt(u64)});
