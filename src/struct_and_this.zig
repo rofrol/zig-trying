@@ -4,13 +4,17 @@ const Bar = struct {
     const Self = @This();
     number: u32,
 
-    // pub fn printMe(self: *@This()) void { // Also works
-    pub fn printMe(self: *Self) void {
+    // error: expected type '*Bar', found '*const Bar
+    // pub fn printMe(self: *@This()) void {
+    // pub fn printMe(self: *Self) void {
+
+    // pub fn printMe(self: Self) void { // also works
+    pub fn printMe(self: @This()) void {
         print("{}\n", .{self.number});
     }
 };
 
 pub fn main() !void {
-    var bar = Bar{ .number = 1000 };
+    const bar = Bar{ .number = 1000 };
     bar.printMe();
 }
